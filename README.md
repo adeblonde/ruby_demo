@@ -8,6 +8,20 @@ To run this project, you will need a Unix shell. This project is compatible with
 
 ## Quickstart
 
+First, be sure that the bash script have the execution rights
+
+```bash
+chmod 755 *.sh
+chmod 755 tools/*.sh
+```
+
+If you are running WSL, you may need some extra steps before being able to use Unix ACL :
+
+```bash
+sudo umount /mnt/c 
+sudo mount -t drvfs C: /mnt/c -o metadata 
+```
+
 In order to install all the dependencies, create a demo app and launch a debug server for it, please run the following script, after having set the parameter 'APP_NAME' to your liking :
 
 ```bash

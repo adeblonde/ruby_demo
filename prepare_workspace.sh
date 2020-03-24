@@ -20,20 +20,28 @@ if [[ $OS != "Linux" ]]
 then
     echo "not a Linux kernel"
     ./dependencies_macos.sh
+    export PATH="/usr/local/opt/ruby/bin:$PATH"
 else
 	echo "Ubuntu"
 	./dependencies_ubuntu.sh
 fi
 
+export RUBY_VERSION=$(ruby -e 'puts RUBY_VERSION[/\d+\.\d+/]').0
+
+### set Ruby in the PATH
+export PATH=~/.gem/ruby/$RUBY_VERSION/bin:$PATH
+
+### install rails
+gem install --user-install rails
+
 ### check tools availability
+echo "ruby version is "$RUBY_VERSION
+
 export DOCKER_VERSION=$(docker --version)
 echo "installed Docker version is"$DOCKER_VERSION
 
 export NODE_VERSION=$(node -v)
 echo "nodejs version is "$NODE_VERSION
-
-export RUBY_VERSION=$(ruby -e 'puts RUBY_VERSION[/\d+\.\d+/]').0
-echo "ruby version is "$RUBY_VERSION
 
 export SQLITE_VERSION=$(sqlite3 --version)
 echo "sqlite version is "$SQLITE_VERSION
@@ -52,9 +60,6 @@ gem install --user-install mysql2 -v 0.5.3
 
 ### install pg gem
 gem install --user-install pg -v '1.2.3'
-
-### set Ruby in the PATH
-export PATH=~/.gem/ruby/$RUBY_VERSION/bin:$PATH
 
 ### create new app folder
 # rails new $APP_NAME -d mysql
@@ -79,7 +84,9 @@ tools/set_docker_compose.sh $APP_NAME
 cd development
 ### start docker DB
 docker-compose up -d
+### WARNING
 ### wait for dockers to be up and running
+### please adapt to your own situation, if 5 seconds is not enough
 sleep 5
 cd ..
 
@@ -95,7 +102,7 @@ echo $mysql_query
 mysql -u root -h 127.0.0.1 -e "$mysql_query" --password=$MYSQL_ROOT_PASSWORD
 done
 
-# ### setting database.yml
+### setting database.yml
 tools/set_database_config.sh $APP_NAME
 
 cd $APP_NAME
@@ -112,25 +119,25 @@ rake db:create
 rake db:migrate
 
 ### install webpacker
-# rails webpacker:install
+rails webpacker:install
 
 # ### start rails server
 rails server
 
-cd ..
-
-#######
-# for stopping the databases
-#######
-# cd development
-# ### stop docker DB
-# docker-compose down
 # cd ..
 
-#######
-# for uninstalling rails if needed
-#######
-# gem uninstall rails
-# gem uninstall railties
-# gem uninstall -i /usr/share/rubygems-integration/all rails
-# gem uninstall -i /usr/share/rubygems-integration/all railties
+# #######
+# # for stopping the databases
+# #######
+# # cd development
+# # ### stop docker DB
+# # docker-compose down
+# # cd ..
+
+# #######
+# # for uninstalling rails if needed
+# #######
+# # gem uninstall rails
+# # gem uninstall railties
+# # gem uninstall -i /usr/share/rubygems-integration/all rails
+# # gem uninstall -i /usr/share/rubygems-integration/all railties

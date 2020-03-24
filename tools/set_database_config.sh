@@ -14,7 +14,7 @@ echo "OS is " $OS
 if [[ $OS != "Linux" ]]
 then
     echo "not a Linux kernel"
-    sed_cmd="sed -i ' '"
+    sed -i ' ' "s/APP_NAME/$APP_NAME/g" $APP_NAME/config/database.yml
+else
+    sed -i "s/APP_NAME/$APP_NAME/g" $APP_NAME/config/database.yml
 fi
-
-$sed_cmd "s/APP_NAME/$APP_NAME/g" $APP_NAME/config/database.yml

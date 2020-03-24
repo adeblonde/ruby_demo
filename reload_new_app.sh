@@ -5,6 +5,12 @@ export APP_NAME="ruby_demo_app"
 
 export MYSQL_PASSWORD=password
 
+export RUBY_VERSION=$(ruby -e 'puts RUBY_VERSION[/\d+\.\d+/]').0
+echo "ruby version is "$RUBY_VERSION
+
+### set Ruby in the PATH
+export PATH=~/.gem/ruby/$RUBY_VERSION/bin:$PATH
+
 # ### setting database.yml
 tools/set_database_config.sh $APP_NAME
 
