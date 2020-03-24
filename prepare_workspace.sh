@@ -62,7 +62,7 @@ gem install --user-install mysql2 -v 0.5.3
 gem install --user-install pg -v '1.2.3'
 
 ### create new app folder
-# rails new $APP_NAME -d mysql
+rails new $APP_NAME -d mysql
 
 #######
 # IMPORT OF EXISTING APP
