@@ -56,4 +56,32 @@ build-iPhoneSimulator/
 # .rubocop-https?--*
 
 ### test app folder
-ruby_demo_app
+ruby_demo_app/bin
+ruby_demo_app/lib
+ruby_demo_app/log
+ruby_demo_app/app/assets
+ruby_demo_app/db
+ruby_demo_app/node_modules
+ruby_demo_app/public
+ruby_demo_app/storage
+ruby_demo_app/tmp
+ruby_demo_app/test
+ruby_demo_app/vendor
+ruby_demo_app/.gitignore
+ruby_demo_app/Rakefile
+ruby_demo_app/.browserslistrc
+ruby_demo_app/babel.config.js
+ruby_demo_app/postcss.config.js
+ruby_demo_app/Gemfile.lock
+ruby_demo_app/yarn.lock
+ruby_demo_app/config.ru
+ruby_demo_app/.ruby-version
+
+### MacOS files
+*.DS_Store
+
+### image assets
+*.png
+*.jpeg
+*.jpg
+*.ico
