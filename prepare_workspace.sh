@@ -116,6 +116,7 @@ bundle install
 
 ### setup of database in Ruby app
 rake db:create
+rake db:seed
 rake db:migrate
 
 ### install webpacker
